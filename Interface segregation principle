@@ -1,0 +1,56 @@
+#include <iostream>
+
+// Інтерфейс для діяльності, яка потребує руху
+class Movable {
+public:
+    virtual void move() = 0;
+};
+
+// Інтерфейс для діяльності, яка потребує використання камери
+class CameraEnabled {
+public:
+    virtual void capturePhoto() = 0;
+};
+
+// Клас автомобіля, який реалізує інтерфейс Movable
+class Car : public Movable {
+public:
+    void move() override {
+        std::cout << "Car is moving." << std::endl;
+    }
+};
+
+// Клас камери, який реалізує інтерфейс CameraEnabled
+class DSLRCamera : public CameraEnabled {
+public:
+    void capturePhoto() override {
+        std::cout << "DSLR Camera captures a photo." << std::endl;
+    }
+};
+
+// Клас "смартфон", який реалізує обидва інтерфейси
+class Smartphone : public Movable, public CameraEnabled {
+public:
+    void move() override {
+        std::cout << "Smartphone is moving." << std::endl;
+    }
+
+    void capturePhoto() override {
+        std::cout << "Smartphone captures a photo." << std::endl;
+    }
+};
+
+int main() {
+    Car car;
+    DSLRCamera dslrCamera;
+    Smartphone smartphone;
+
+    car.move();
+
+    dslrCamera.capturePhoto();
+
+    smartphone.move();
+    smartphone.capturePhoto();
+
+    return 0;
+}
